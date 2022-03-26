@@ -1,5 +1,5 @@
 // Add console.log to check to see if our code is working.
-// console.log("working");
+console.log("working");
 
 // We are going to read the external json file
 // we need to use d3.json() method, but we need to have
@@ -44,14 +44,14 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 
 // Create a base layer that holds both maps.
 let baseMaps = {
-    "Street": streets,
+    "Streets": streets,
     "Satellite": satelliteStreets
   };
 
 let map = L.map('mapid', {
     center: [39.5, -98.5],
     zoom:3,
-    layers: [satelliteStreets]
+    layers: [streets]
 })
 
 // To complete the code for the map layers, use the Leaflet control.layers, which will control the layers we'll see on the map
@@ -67,7 +67,7 @@ L.control.layers(baseMaps).addTo(map);
 // });
 
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data){
-        console.log(data);
+        
         L.geoJSON(data).addTo(map)
 });
 // let torontoHoods = "https://raw.githubusercontent.com/daniel89mk/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/torontoNeighborhoods.json";
