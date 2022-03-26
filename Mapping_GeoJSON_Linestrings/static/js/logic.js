@@ -60,31 +60,51 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);  
 
 // Accessing the Toronto airline routes GeoJSON URL.
-let torontoData = "https://raw.githubusercontent.com/daniel89mk/Mapping_Earthquakes/main/torontoRoutes.json";
+let torontoData = "https://raw.githubusercontent.com/daniel89mk/Mapping_Earthquakes/Mapping_GeoJSON_Linestrings/torontoRoutes.json";
+
+// d3.json(torontoData).then(function(data) {
+//     console.log(data);
+// //   // Creating a GeoJSON layer with the retrieved data.
+//   L.geoJSON(data).addTo(map);
+// });
+
+let myStyle = {
+    color:  "#ffffa1",
+    weight: 2,
+}
 
 d3.json(torontoData).then(function(data) {
     console.log(data);
 //   // Creating a GeoJSON layer with the retrieved data.
-  L.geoJSON(data).addTo(map);
+  L.geoJSON(data, {
+      style: myStyle,
+      onEachFeature: function(feature, layer) {
+          layer.bindPopup("<h3>Airline: " + feature.properties.airline + "</h3> <hr><h3>Destination: "+ feature.properties.dst + "</h3>")
+      }
+  }).addTo(map);
 });
+
 
 // we will access majorAirports.json file on Github with a variable 
-let airportData = "https://raw.githubusercontent.com/daniel89mk/Mapping_Earthquakes/Mapping_GeoJSON_Points/majorAirports.json";
+// let airportData = "https://raw.githubusercontent.com/daniel89mk/Mapping_Earthquakes/Mapping_GeoJSON_Points/majorAirports.json";
 
 //Grabbing our GeoJSON data.
-d3.json(airportData).then(function(data) {
-    console.log(data);
-//   // Creating a GeoJSON layer with the retrieved data.
-  L.geoJSON(data).addTo(map);
-});
+// d3.json(airportData).then(function(data) {
+//     console.log(data);
+// //   // Creating a GeoJSON layer with the retrieved data.
+//   L.geoJSON(data).addTo(map);
+// });
 
 
-// d3.json(airportData).then(function(features, layer) {
+// d3.json(airportData).then(function(data) {
 //     console.log(data);
 //     // Creating a GeoJSON layer with the retrieved data.
-//     console.log(layer);
-//     layer.bindPopup("<h2>Airport Code: " + features.properties.faa + "</h2>"+"<hr>"+"<p>Airport Name: "+ features.properties.name);
+//     L.geoJSON(data, {
+            // onEachFeature: function(feature, layer) {
+            //     layer.bindPopup("<h2>Airport Code: " + feature.properties.faa + "</h2>"+"<hr>"+"<p>Airport Name: "+ feature.properties.name)
+            // }
 //     }).addTo(map)
+// });     
            
 
 
