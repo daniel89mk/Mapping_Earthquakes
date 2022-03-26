@@ -45,12 +45,12 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 // Create a base layer that holds both maps.
 let baseMaps = {
     "Street": streets,
-    "Satellite Streets": satelliteStreets
+    "Satellite": satelliteStreets
   };
 
 let map = L.map('mapid', {
-    center: [43.7, -79.3],
-    zoom:11,
+    center: [39.5, -98.5],
+    zoom:3,
     layers: [satelliteStreets]
 })
 
@@ -66,12 +66,16 @@ L.control.layers(baseMaps).addTo(map);
 //   L.geoJSON(data).addTo(map);
 // });
 
-let torontoHoods = "https://raw.githubusercontent.com/daniel89mk/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/torontoNeighborhoods.json";
-
-d3.json(torontoHoods).then(function(data){
-    console.log(data);
-    L.geoJSON(data).addTo(map)
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data){
+        console.log(data);
+        L.geoJSON(data).addTo(map)
 });
+// let torontoHoods = "https://raw.githubusercontent.com/daniel89mk/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/torontoNeighborhoods.json";
+
+// d3.json(torontoHoods).then(function(data){
+//     console.log(data);
+//     L.geoJSON(data).addTo(map)
+// });
 
 // let myStyle = {
 //     color:  "#ffffa1",
