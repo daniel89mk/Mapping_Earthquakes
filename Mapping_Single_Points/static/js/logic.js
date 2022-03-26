@@ -45,5 +45,4 @@ streets.addTo(map);
      radius: 300,
      color: "black",
      fillColor: "#ffffa1"
- }).addTo(map);
 
